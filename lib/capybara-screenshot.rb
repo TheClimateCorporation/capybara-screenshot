@@ -18,6 +18,12 @@ module Capybara
       {:html => saver.html_path, :image => saver.screenshot_path}
     end
 
+    def self.screenshot_and_save_image(name)
+      saver = Saver.new(Capybara, Capybara.page, false, nil, name)
+      saver.save
+      {:html => nil, :image => saver.screenshot_path}
+    end
+
     def self.screenshot_and_open_image
       require "launchy"
 
@@ -29,6 +35,7 @@ module Capybara
 
     class << self
       alias screen_shot_and_save_page screenshot_and_save_page
+      alias screen_shot_and_save_image screenshot_and_save_image
       alias screen_shot_and_open_image screenshot_and_open_image
     end
 

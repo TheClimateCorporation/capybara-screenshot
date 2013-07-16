@@ -3,10 +3,14 @@ module Capybara
     class Saver
       attr_reader :capybara, :page, :file_base_name
 
-      def initialize(capybara, page, html_save=true, filename_prefix='screenshot')
+      def initialize(capybara, page, html_save=true, filename_prefix='screenshot', file_name=nil)
         @capybara, @page, @html_save = capybara, page, html_save
         time_now = Time.now
-        @file_base_name = "#{filename_prefix}_#{time_now.strftime('%Y-%m-%d-%H-%M-%S.')}#{'%03d' % (time_now.usec/1000).to_i}"
+        if file_name
+          @file_base_name = file_name
+        else
+          @file_base_name = "#{filename_prefix}_#{time_now.strftime('%Y-%m-%d-%H-%M-%S.')}#{'%03d' % (time_now.usec/1000).to_i}"
+        end
       end
 
       def save

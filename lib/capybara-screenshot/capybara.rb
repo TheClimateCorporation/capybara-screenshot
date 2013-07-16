@@ -10,5 +10,9 @@ module Capybara
     def screenshot_and_open_image
       Capybara::Screenshot.screenshot_and_open_image
     end
+
+    def screenshot_and_save_image(name=nil)
+      Capybara::Screenshot.screenshot_and_save_image(name)
+    end
   end
 end

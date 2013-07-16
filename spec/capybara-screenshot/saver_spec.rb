@@ -90,6 +90,13 @@ describe Capybara::Screenshot::Saver do
 
       saver.save
     end
+
+    it 'should use the file_name as teh name of the file saved if it exists' do
+      saver = Capybara::Screenshot::Saver.new(capybara_mock, page_mock, true, 'custom-prefix', 'some_file_name')
+      driver_mock.should_receive(:render).with(/#{capybara_root}\/some_file_name\.png$/)
+
+      saver.save
+    end
   end
 
   it 'should not save html if false passed as html argument' do
